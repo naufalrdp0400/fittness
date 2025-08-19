@@ -5,6 +5,7 @@ import 'package:fittness/utils/app_color.dart';
 import 'package:fittness/utils/app_image.dart';
 import 'package:fittness/widget/botnavbar.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Login1 extends StatefulWidget {
   const Login1({super.key});
@@ -31,7 +32,10 @@ class _Login1State extends State<Login1> {
     }
     final userData = await DbHelper.loginUser(username, password);
     if (userData != null) {
-      PreferenceHandler.saveLogin();
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString('username', userData.username);
+      await prefs.setString('email', userData.email);
+      // PreferenceHandler.saveLogin();
       context.pushReplacementNamed(BotNavBar1.id);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(

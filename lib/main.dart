@@ -25,7 +25,6 @@ class MyApp extends StatelessWidget {
       routes: {
         "/login": (context) => Screen1(),
         SplashScreen1.id: (context) => SplashScreen1(),
-        // Register12.id: (context) => Register12(),
         BotNavBar1.id: (context) => BotNavBar1(),
       },
       // home: DataTrain(),

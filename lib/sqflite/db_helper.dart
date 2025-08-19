@@ -1,5 +1,6 @@
 import 'package:fittness/models/train.dart';
 import 'package:fittness/models/user.dart';
+import 'package:fittness/preference/shared_preference.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -42,9 +43,34 @@ class DbHelper {
     );
 
     if (results.isNotEmpty) {
+      User user = User.fromMap(results.first);
+      await PreferenceHandler.saveUserId(user.id!);
+      await PreferenceHandler.saveLogin();
+      return user;
+    }
+    return null;
+  }
+
+  static Future<User?> getLoggedInUser() async {
+    final userId = await PreferenceHandler.getUserId();
+    if (userId == null) return null;
+
+    final db = await databaseHelper();
+    final List<Map<String, dynamic>> results = await db.query(
+      'users',
+      where: 'id = ?',
+      whereArgs: [userId],
+    );
+
+    if (results.isNotEmpty) {
       return User.fromMap(results.first);
     }
     return null;
+  }
+
+  static Future<void> logOut() async {
+    await PreferenceHandler.removeUserId();
+    await PreferenceHandler.removeLogin();
   }
 
   static Future<List<User>> getAllUsers() async {

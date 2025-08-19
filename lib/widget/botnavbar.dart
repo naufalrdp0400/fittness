@@ -2,6 +2,7 @@ import 'package:fittness/utils/app_color.dart';
 import 'package:fittness/views/data_train.dart';
 import 'package:fittness/views/home_screen.dart';
 import 'package:fittness/views/training.dart';
+import 'package:fittness/widget/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
@@ -20,7 +21,7 @@ class _BotNavBar1State extends State<BotNavBar1> {
     HomeScr1(),
     Training1(),
     DataTrain(),
-    Center(child: Text("Halaman 2")),
+    Drawer1(),
   ];
   @override
   Widget build(BuildContext context) {
