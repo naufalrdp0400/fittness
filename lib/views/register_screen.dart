@@ -1,11 +1,12 @@
-import 'package:fittness/extensions/navigations.dart';
 import 'package:fittness/models/user.dart';
+import 'package:fittness/sqflite/db_helper.dart';
 import 'package:fittness/utils/app_color.dart';
 import 'package:fittness/utils/app_image.dart';
 import 'package:flutter/material.dart';
 
 class Register1 extends StatefulWidget {
   const Register1({super.key});
+  static const id = "/register";
 
   @override
   State<Register1> createState() => _Register1State();
@@ -38,8 +39,8 @@ class _Register1State extends State<Register1> {
       isLoading = false;
       return;
     }
-    // final user = User(username = username, email = email, password = password);
-    // await DbHelper.registerUser(user);
+    final user = User(username: username, email: email, password: password);
+    await DbHelper.registerUser(user);
     Future.delayed(const Duration(seconds: 2)).then((value) {
       isLoading = false;
       ScaffoldMessenger.of(

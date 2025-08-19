@@ -1,4 +1,5 @@
-import 'package:fittness/models/trrain.dart';
+import 'package:fittness/models/train.dart';
+import 'package:fittness/sqflite/db_helper.dart';
 import 'package:fittness/utils/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:msh_checkbox/msh_checkbox.dart';
@@ -57,7 +58,7 @@ class _Training1State extends State<Training1> {
       categories: categories,
       stage: stage,
     );
-    // await DbHelper.registerTrain(train);
+    await DbHelper.registerTrain(train);
     Future.delayed(const Duration(seconds: 2)).then((value) {
       isLoading = false;
       ScaffoldMessenger.of(
@@ -178,27 +179,38 @@ class _Training1State extends State<Training1> {
                 SizedBox(
                   height: 56,
                   width: double.infinity,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColor.oranye,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      gradient: LinearGradient(
+                        colors: [AppColor.primary, AppColor.secondary],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
                       ),
                     ),
-                    onPressed: () {
-                      isLoading ? null : registerTrain();
-                    },
-                    child: isLoading
-                        ? const CircularProgressIndicator(color: Colors.white)
-                        : Text(
-                            "Save Data",
-                            style: TextStyle(
-                              fontFamily: "Poppins",
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        shadowColor: Colors.transparent,
+                        backgroundColor: Colors.transparent,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                      onPressed: () {
+                        isLoading ? null : registerTrain();
+                      },
+                      child: isLoading
+                          ? const CircularProgressIndicator(color: Colors.white)
+                          : Text(
+                              "Save Data",
+                              style: TextStyle(
+                                fontFamily: "Poppins",
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
                             ),
-                          ),
+                    ),
                   ),
                 ),
               ],

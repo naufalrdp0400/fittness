@@ -26,11 +26,11 @@ class CategoriesCard extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
         boxShadow: const [
-          BoxShadow(
-            color: AppColor.secondary,
-            blurRadius: 6,
-            offset: Offset(2, 2),
-          ),
+          // BoxShadow(
+          //   color: AppColor.secondary,
+          //   blurRadius: 6,
+          //   offset: Offset(2, 2),
+          // ),
         ],
       ),
       child: Row(

@@ -1,6 +1,8 @@
 import 'package:fittness/extensions/navigations.dart';
 import 'package:fittness/utils/app_color.dart';
 import 'package:fittness/utils/app_image.dart';
+import 'package:fittness/views/login_screen.dart';
+import 'package:fittness/views/register_screen.dart';
 import 'package:flutter/material.dart';
 
 class Screen1 extends StatefulWidget {
@@ -69,7 +71,7 @@ class _Screen1State extends State<Screen1> {
                       ),
                     ),
                     onPressed: () {
-                      // context.pushNamed(routeName);
+                      context.push(Register1());
                     },
                     child: Text(
                       "Create Account",
@@ -94,7 +96,7 @@ class _Screen1State extends State<Screen1> {
                       ),
                     ),
                     onPressed: () {
-                      // context.pushNamed(routeName);
+                      context.push(Login1());
                     },
                     child: Text(
                       "Sign In",

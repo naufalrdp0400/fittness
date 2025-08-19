@@ -1,8 +1,5 @@
-import 'package:fittness/views/login_screen.dart';
-import 'package:fittness/views/register_screen.dart';
 import 'package:fittness/views/screen.dart';
 import 'package:fittness/views/splash_screen.dart';
-import 'package:fittness/views/training.dart';
 import 'package:fittness/widget/botnavbar.dart';
 import 'package:flutter/material.dart';
 
@@ -23,15 +20,15 @@ class MyApp extends StatelessWidget {
       ),
 
       debugShowCheckedModeBanner: false,
-      // title: 'Flutter Demo',
-      // initialRoute: SplashScreen1.id,
-      // routes: {
-      //   "/login": (context) => Tugas6Flutter(),
-      //   SplashScreen1.id: (context) => SplashScreen1(),
-      //   // Register12.id: (context) => Register12(),
-      //   BotBar1.id: (context) => BotBar1(),
-      // },
-      home: BotNavBar1(),
+      title: 'Flutter Demo',
+      initialRoute: SplashScreen1.id,
+      routes: {
+        "/login": (context) => Screen1(),
+        SplashScreen1.id: (context) => SplashScreen1(),
+        // Register12.id: (context) => Register12(),
+        BotNavBar1.id: (context) => BotNavBar1(),
+      },
+      // home: DataTrain(),
     );
   }
 }

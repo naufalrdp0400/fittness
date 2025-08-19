@@ -1,4 +1,5 @@
 import 'package:fittness/utils/app_color.dart';
+import 'package:fittness/views/data_train.dart';
 import 'package:fittness/views/home_screen.dart';
 import 'package:fittness/views/training.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 class BotNavBar1 extends StatefulWidget {
   const BotNavBar1({super.key});
+  static const id = "/botnavbar";
 
   @override
   State<BotNavBar1> createState() => _BotNavBar1State();
@@ -17,7 +19,7 @@ class _BotNavBar1State extends State<BotNavBar1> {
   static const List<Widget> _widgetOptions = <Widget>[
     HomeScr1(),
     Training1(),
-    Center(child: Text("Halaman 2")),
+    DataTrain(),
     Center(child: Text("Halaman 2")),
   ];
   @override

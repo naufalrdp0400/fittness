@@ -1,7 +1,7 @@
-import 'package:fittness/widget/categories_card.dart';
 import 'package:fittness/utils/app_color.dart';
-import 'package:flutter/material.dart';
+import 'package:fittness/widget/categories_card.dart';
 import 'package:fittness/widget/progress_card.dart';
+import 'package:flutter/material.dart';
 
 class HomeScr1 extends StatefulWidget {
   const HomeScr1({super.key});

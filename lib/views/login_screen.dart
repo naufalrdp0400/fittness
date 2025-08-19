@@ -1,10 +1,14 @@
 import 'package:fittness/extensions/navigations.dart';
-import 'package:fittness/utils/app_image.dart';
+import 'package:fittness/preference/shared_preference.dart';
+import 'package:fittness/sqflite/db_helper.dart';
 import 'package:fittness/utils/app_color.dart';
+import 'package:fittness/utils/app_image.dart';
+import 'package:fittness/widget/botnavbar.dart';
 import 'package:flutter/material.dart';
 
 class Login1 extends StatefulWidget {
   const Login1({super.key});
+  static const id = "/login";
 
   @override
   State<Login1> createState() => _Login1State();
@@ -16,25 +20,25 @@ class _Login1State extends State<Login1> {
   bool isVisibility = false;
   // bool _obsecurePassword = true;
 
-  // login() async {
-  //   final username = usernameController.text.trim();
-  //   final password = passwordController.text.trim();
-  //   if (username.isEmpty || password.isEmpty) {
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       const SnackBar(content: Text("Username and Password cannot be empty")),
-  //     );
-  //     return;
-  //   }
-  //   final userData = await DbHelper.loginUser(username, password);
-  //   if (userData != null) {
-  //     PreferencedHandler.saveLogin();
-  //     context.pushReplacementNamed(newRouteName);
-  //   } else {
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       const SnackBar(content: Text("Incorrect username or password")),
-  //     );
-  //   }
-  // }
+  login() async {
+    final username = usernameController.text.trim();
+    final password = passwordController.text.trim();
+    if (username.isEmpty || password.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Username and Password cannot be empty")),
+      );
+      return;
+    }
+    final userData = await DbHelper.loginUser(username, password);
+    if (userData != null) {
+      PreferenceHandler.saveLogin();
+      context.pushReplacementNamed(BotNavBar1.id);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Incorrect username or password")),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -145,13 +149,13 @@ class _Login1State extends State<Login1> {
                   width: double.infinity,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColor.kuningoranye,
+                      backgroundColor: AppColor.oranye,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
                     ),
                     onPressed: () {
-                      // context.pushNamed(routeName);
+                      login();
                     },
                     child: Text(
                       "Login",
