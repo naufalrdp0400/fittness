@@ -1,51 +1,40 @@
-import 'package:fittness/models/train.dart';
+import 'package:fittness/models/user.dart';
 import 'package:fittness/sqflite/db_helper.dart';
 import 'package:fittness/utils/app_color.dart';
-import 'package:fittness/widget/train_card.dart';
+import 'package:fittness/widget/data_card.dart';
 import 'package:flutter/material.dart';
 
-class DataTrain extends StatefulWidget {
-  const DataTrain({super.key});
-  static const id = "/dataTrain";
+class DataUser extends StatefulWidget {
+  const DataUser({super.key});
+  static const id = "/dataUser";
 
   @override
-  State<DataTrain> createState() => _DataTrainState();
+  State<DataUser> createState() => _DataUserState();
 }
 
-class _DataTrainState extends State<DataTrain> {
-  List<Train> train = [];
+class _DataUserState extends State<DataUser> {
+  List<User> user = [];
   @override
   void initState() {
     super.initState();
-    getTrain();
+    getUser();
   }
 
-  final TextEditingController scheduleController = TextEditingController();
-  final TextEditingController categoriesController = TextEditingController();
-  final TextEditingController stageController = TextEditingController();
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
-  Future<void> getTrain() async {
-    final dataTrain = await DbHelper.getAllTrain();
-    print(dataTrain);
+  Future<void> getUser() async {
+    final dataUser = await DbHelper.getAllUsers();
+    print(dataUser);
     setState(() {
-      train = dataTrain;
+      user = dataUser;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppColor.background,
-        title: Image.asset(
-          "assets/images/fitnesstrsp.png",
-          height: 300,
-          width: 100,
-          fit: BoxFit.cover,
-        ),
-      ),
-      body: Stack(children: [buildBackground(), buildLayer()]),
-    );
+    return Scaffold(body: Stack(children: [buildBackground(), buildLayer()]));
   }
 
   SafeArea buildLayer() {
@@ -58,7 +47,7 @@ class _DataTrainState extends State<DataTrain> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  "Program",
+                  "Database Account",
                   style: TextStyle(
                     fontFamily: "Poppins",
                     fontSize: 30,
@@ -70,11 +59,11 @@ class _DataTrainState extends State<DataTrain> {
                 ListView.builder(
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemCount: train.length,
+                  itemCount: user.length,
                   itemBuilder: (BuildContext context, int index) {
-                    final dataTrain = train[index];
-                    return TrainCard(
-                      data: dataTrain,
+                    final dataUser = user[index];
+                    return UserCard(
+                      data: dataUser,
                       onEdit: () {
                         showDialog(
                           context: context,
@@ -84,26 +73,25 @@ class _DataTrainState extends State<DataTrain> {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 TextFormField(
-                                  controller: scheduleController
-                                    ..text = dataTrain.schedule,
+                                  controller: usernameController
+                                    ..text = dataUser.username,
                                   decoration: InputDecoration(
-                                    hintText: "Schedule",
+                                    hintText: "Username",
+                                  ),
+                                ),
+                                TextFormField(
+                                  controller: emailController
+                                    ..text = dataUser.email,
+                                  decoration: InputDecoration(
+                                    hintText: "Email Address",
                                   ),
                                 ),
                                 SizedBox(height: 12),
                                 TextFormField(
-                                  controller: categoriesController
-                                    ..text = dataTrain.categories,
+                                  controller: passwordController
+                                    ..text = dataUser.password,
                                   decoration: InputDecoration(
-                                    hintText: "Categories",
-                                  ),
-                                ),
-                                SizedBox(height: 12),
-                                TextFormField(
-                                  controller: stageController
-                                    ..text = dataTrain.stage,
-                                  decoration: InputDecoration(
-                                    hintText: "Stage",
+                                    hintText: "Password",
                                   ),
                                 ),
                               ],
@@ -111,14 +99,14 @@ class _DataTrainState extends State<DataTrain> {
                             actions: [
                               ElevatedButton(
                                 onPressed: () {
-                                  final updateTrain = Train(
-                                    id: dataTrain.id!,
-                                    schedule: scheduleController.text,
-                                    categories: categoriesController.text,
-                                    stage: stageController.text,
+                                  final updateUser = User(
+                                    id: dataUser.id!,
+                                    username: usernameController.text,
+                                    email: emailController.text,
+                                    password: passwordController.text,
                                   );
-                                  DbHelper.updateTrain(updateTrain);
-                                  getTrain();
+                                  DbHelper.updateUser(updateUser);
+                                  getUser();
                                   Navigator.pop(context);
                                 },
                                 child: Text("Save"),
@@ -132,8 +120,8 @@ class _DataTrainState extends State<DataTrain> {
                         );
                       },
                       onDelete: () {
-                        DbHelper.deleteTrain(dataTrain.id!);
-                        getTrain();
+                        DbHelper.deleteUser(dataUser.id!);
+                        getUser();
                       },
                     );
                   },

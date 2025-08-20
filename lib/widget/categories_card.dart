@@ -6,6 +6,7 @@ class CategoriesCard extends StatelessWidget {
   final String title;
   final String subtitle;
   final Widget trailing;
+  final VoidCallback? onTap;
 
   const CategoriesCard({
     super.key,
@@ -13,59 +14,56 @@ class CategoriesCard extends StatelessWidget {
     required this.title,
     required this.subtitle,
     required this.trailing,
+    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 71,
-      width: double.infinity,
-      margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: const [
-          // BoxShadow(
-          //   color: AppColor.secondary,
-          //   blurRadius: 6,
-          //   offset: Offset(2, 2),
-          // ),
-        ],
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          leading,
-          const SizedBox(width: 12),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  title,
-                  style: const TextStyle(
-                    fontFamily: "Poppins",
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                    color: AppColor.text,
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        height: 71,
+        width: double.infinity,
+        margin: const EdgeInsets.only(bottom: 12),
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            leading,
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    title,
+                    style: const TextStyle(
+                      fontFamily: "Poppins",
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      color: AppColor.text,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  subtitle,
-                  style: const TextStyle(
-                    fontFamily: "Montserrat",
-                    fontSize: 12,
-                    color: AppColor.text,
+                  const SizedBox(height: 4),
+                  Text(
+                    subtitle,
+                    style: const TextStyle(
+                      fontFamily: "Montserrat",
+                      fontSize: 12,
+                      color: AppColor.text,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          trailing,
-        ],
+            trailing,
+          ],
+        ),
       ),
     );
   }

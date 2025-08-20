@@ -1,5 +1,4 @@
 import 'package:fittness/extensions/navigations.dart';
-import 'package:fittness/preference/shared_preference.dart';
 import 'package:fittness/sqflite/db_helper.dart';
 import 'package:fittness/utils/app_color.dart';
 import 'package:fittness/utils/app_image.dart';
@@ -19,7 +18,6 @@ class _Login1State extends State<Login1> {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   bool isVisibility = false;
-  // bool _obsecurePassword = true;
 
   login() async {
     final username = usernameController.text.trim();

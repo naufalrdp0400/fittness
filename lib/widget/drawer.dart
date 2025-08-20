@@ -1,6 +1,7 @@
 import 'package:fittness/extensions/navigations.dart';
 import 'package:fittness/utils/app_color.dart';
-import 'package:fittness/widget/log_out.dart';
+import 'package:fittness/views/data_user.dart';
+import 'package:fittness/views/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -17,8 +18,8 @@ class _Drawer1State extends State<Drawer1> {
   int _selectedIndexDrawer = 0;
 
   static const List<Widget> _widgetOptions = <Widget>[
-    Center(child: Text("Halaman 1")),
-    LogOut1(),
+    Setting1(),
+    DataUser(),
     Center(child: Text("Halaman 3")),
   ];
 
@@ -48,7 +49,10 @@ class _Drawer1State extends State<Drawer1> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      endDrawerEnableOpenDragGesture: false,
+      backgroundColor: AppColor.background,
       body: Center(child: _widgetOptions[_selectedIndexDrawer]),
+
       appBar: AppBar(
         backgroundColor: AppColor.background,
         title: Image.asset(
@@ -58,7 +62,7 @@ class _Drawer1State extends State<Drawer1> {
           fit: BoxFit.cover,
         ),
       ),
-      drawer: Drawer(
+      endDrawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
@@ -78,15 +82,15 @@ class _Drawer1State extends State<Drawer1> {
               accountEmail: Text(email.isNotEmpty ? email : ''),
             ),
             ListTile(
-              leading: Icon(Icons.dashboard),
-              title: Text("Dashboard"),
+              leading: Icon(Icons.settings),
+              title: Text("Settings"),
               onTap: () {
                 onItemTap(0);
               },
             ),
             ListTile(
-              leading: Icon(Icons.dashboard),
-              title: Text("Dashboard"),
+              leading: Icon(Icons.storage),
+              title: Text("Database Account"),
               onTap: () {
                 onItemTap(1);
               },
