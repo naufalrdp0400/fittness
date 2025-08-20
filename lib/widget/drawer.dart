@@ -17,11 +17,7 @@ class _Drawer1State extends State<Drawer1> {
   String email = '';
   int _selectedIndexDrawer = 0;
 
-  static const List<Widget> _widgetOptions = <Widget>[
-    Setting1(),
-    DataUser(),
-    Center(child: Text("Halaman 3")),
-  ];
+  static const List<Widget> _widgetOptions = <Widget>[Setting1(), DataUser()];
 
   @override
   void initState() {
@@ -93,13 +89,6 @@ class _Drawer1State extends State<Drawer1> {
               title: Text("Database Account"),
               onTap: () {
                 onItemTap(1);
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.dashboard),
-              title: Text("Dashboard"),
-              onTap: () {
-                onItemTap(2);
               },
             ),
           ],

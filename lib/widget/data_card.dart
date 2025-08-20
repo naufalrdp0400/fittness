@@ -21,7 +21,7 @@ class UserCard extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       margin: EdgeInsets.only(bottom: 20),
       child: Container(
-        height: 120,
+        height: 160,
         width: double.infinity,
         padding: EdgeInsets.all(16),
         decoration: BoxDecoration(
@@ -60,6 +60,16 @@ class UserCard extends StatelessWidget {
                   ],
                 ),
               ],
+            ),
+            SizedBox(height: 8),
+            Text(
+              data.email,
+              style: TextStyle(
+                fontFamily: "Montserrat",
+                fontSize: 16,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             SizedBox(height: 8),
             Text(
