@@ -59,6 +59,7 @@ class _Drawer1State extends State<Drawer1> {
         ),
       ),
       endDrawer: Drawer(
+        backgroundColor: AppColor.background,
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[

@@ -54,6 +54,7 @@ class CategoriesCard extends StatelessWidget {
                     subtitle,
                     style: const TextStyle(
                       fontFamily: "Montserrat",
+                      fontWeight: FontWeight.bold,
                       fontSize: 12,
                       color: AppColor.text,
                     ),

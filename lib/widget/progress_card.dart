@@ -37,6 +37,7 @@ class Progresscard extends StatelessWidget {
             subtitle,
             style: TextStyle(
               fontFamily: "Montserrat",
+              fontWeight: FontWeight.bold,
               fontSize: 12,
               color: AppColor.text,
             ),

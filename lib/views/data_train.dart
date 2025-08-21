@@ -58,7 +58,7 @@ class _DataTrainState extends State<DataTrain> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  "Program",
+                  " Exercise Program",
                   style: TextStyle(
                     fontFamily: "Poppins",
                     fontSize: 30,

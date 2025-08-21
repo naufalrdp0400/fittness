@@ -21,7 +21,7 @@ class _SplashScreen1State extends State<SplashScreen1> {
 
   void isLogin() async {
     bool? isLogin = await PreferenceHandler.getLogin();
-    Future.delayed(Duration(seconds: 3)).then((value) async {
+    Future.delayed(Duration(seconds: 1)).then((value) async {
       print(isLogin);
       if (isLogin == true) {
         context.pushReplacementNamed(BotNavBar1.id);

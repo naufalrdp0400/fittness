@@ -137,20 +137,20 @@ class _HomeScr1State extends State<HomeScr1> {
                 child: Row(
                   children: [
                     Progresscard(
-                      title: "Chest Workout",
-                      subtitle: "15 min remaining",
+                      title: "Strength Exercise",
+                      subtitle: "10 min remaining",
                     ),
                     Progresscard(
-                      title: "Legs Workout",
-                      subtitle: "23 min remaining",
+                      title: "Torso and Trap",
+                      subtitle: "5 min remaining",
                     ),
                     Progresscard(
                       title: "Abs Workout",
-                      subtitle: "30 min remaining",
+                      subtitle: "15 min remaining",
                     ),
                     Progresscard(
                       title: "Both Side Plank",
-                      subtitle: "30 min remaining",
+                      subtitle: "15 min remaining",
                     ),
                   ],
                 ),
