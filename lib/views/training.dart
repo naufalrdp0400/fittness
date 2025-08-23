@@ -2,6 +2,7 @@ import 'package:fittness/models/train.dart';
 import 'package:fittness/sqflite/db_helper.dart';
 import 'package:fittness/utils/app_color.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:msh_checkbox/msh_checkbox.dart';
 
 class Training1 extends StatefulWidget {
@@ -13,8 +14,11 @@ class Training1 extends StatefulWidget {
 
 class _Training1State extends State<Training1> {
   final TextEditingController scheduleController = TextEditingController();
-  final TextEditingController categoriesController = TextEditingController();
-  final TextEditingController stageController = TextEditingController();
+  final TextEditingController timeController = TextEditingController();
+  String? selectedCategories;
+  String? selectedStage;
+  DateTime? selectedDate;
+  TimeOfDay? selectedTime;
   bool isLoading = false;
   bool isChecked = false;
   MSHCheckboxStyle style = MSHCheckboxStyle.stroke;
@@ -39,9 +43,15 @@ class _Training1State extends State<Training1> {
     isLoading = true;
     setState(() {});
     final schedule = scheduleController.text;
-    final categories = categoriesController.text;
-    final stage = stageController.text;
-    if (schedule.isEmpty || categories.isEmpty || stage.isEmpty || !isChecked) {
+    final time = timeController.text;
+    final categories = selectedCategories;
+    final stage = selectedStage;
+
+    if (schedule.isEmpty ||
+        time.isEmpty ||
+        categories == null ||
+        stage == null ||
+        !isChecked) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text(
@@ -55,6 +65,7 @@ class _Training1State extends State<Training1> {
     }
     final train = Train(
       schedule: schedule,
+      time: time,
       categories: categories,
       stage: stage,
     );
@@ -121,31 +132,116 @@ class _Training1State extends State<Training1> {
               children: [
                 Text(
                   textAlign: TextAlign.center,
-                  "Set Your Exercise Program",
+                  "Log Workout",
                   style: TextStyle(
                     fontFamily: "Poppins",
-                    fontSize: 30,
+                    fontSize: 28,
                     fontWeight: FontWeight.bold,
                     color: AppColor.text,
                   ),
                 ),
                 height(30),
-                buildTextField(
-                  controller: scheduleController,
-                  labelText: "Schedule",
-                  hintText: "Please set your schedule",
+                GestureDetector(
+                  onTap: () async {
+                    final DateTime? pickerDate = await showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime(2025),
+                      lastDate: DateTime(2026),
+                    );
+                    if (pickerDate != null) {
+                      final formatted = DateFormat(
+                        'd MMMM yyyy',
+                        'id_ID',
+                      ).format(pickerDate);
+                      scheduleController.text = formatted;
+                    }
+                  },
+                  child: AbsorbPointer(
+                    child: buildTextField(
+                      controller: scheduleController,
+                      labelText: "Schedule",
+                      hintText: "Select of Date",
+                    ),
+                  ),
                 ),
                 height(10),
-                buildTextField(
-                  controller: categoriesController,
-                  labelText: "Categories",
-                  hintText: "Select the category you want",
+                GestureDetector(
+                  onTap: () async {
+                    final TimeOfDay? pickerTime = await showTimePicker(
+                      context: context,
+                      initialTime: TimeOfDay.now(),
+                    );
+                    if (pickerTime != null) {
+                      final now = DateTime.now();
+                      final time = DateTime(
+                        now.year,
+                        now.month,
+                        now.day,
+                        pickerTime.hour,
+                        pickerTime.minute,
+                      );
+                      final formattedTime = DateFormat.jm("id_ID").format(time);
+                      timeController.text = formattedTime;
+                    }
+                  },
+                  child: AbsorbPointer(
+                    child: buildTextField(
+                      controller: timeController,
+                      labelText: "Time",
+                      hintText: "Select of Time",
+                    ),
+                  ),
                 ),
                 height(10),
-                buildTextField(
-                  controller: stageController,
-                  labelText: "Stage",
-                  hintText: "Select the stage you want",
+                DropdownButtonFormField<String>(
+                  value: selectedCategories,
+                  items: ["Yoga", "Cardio", "Strength", "Stretching"].map((
+                    String value,
+                  ) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                  decoration: InputDecoration(
+                    labelText: "Categories",
+                    filled: true,
+                    fillColor: Colors.white,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  onChanged: (value) {
+                    setState(() {
+                      selectedCategories = value!;
+                    });
+                  },
+                ),
+                height(10),
+                DropdownButtonFormField<String>(
+                  value: selectedStage,
+                  items: ["Beginner", "Intermediate", "Advance"].map((
+                    String value,
+                  ) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                  decoration: InputDecoration(
+                    labelText: "Stage",
+                    filled: true,
+                    fillColor: Colors.white,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  onChanged: (value) {
+                    setState(() {
+                      selectedStage = value!;
+                    });
+                  },
                 ),
                 height(20),
                 Row(
@@ -202,7 +298,7 @@ class _Training1State extends State<Training1> {
                       child: isLoading
                           ? const CircularProgressIndicator(color: Colors.white)
                           : Text(
-                              "Save Data",
+                              "Submit",
                               style: TextStyle(
                                 fontFamily: "Poppins",
                                 fontSize: 18,

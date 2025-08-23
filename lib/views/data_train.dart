@@ -21,6 +21,7 @@ class _DataTrainState extends State<DataTrain> {
   }
 
   final TextEditingController scheduleController = TextEditingController();
+  final TextEditingController timeController = TextEditingController();
   final TextEditingController categoriesController = TextEditingController();
   final TextEditingController stageController = TextEditingController();
 
@@ -113,6 +114,7 @@ class _DataTrainState extends State<DataTrain> {
                                 onPressed: () {
                                   final updateTrain = Train(
                                     id: dataTrain.id!,
+                                    time: timeController.text,
                                     schedule: scheduleController.text,
                                     categories: categoriesController.text,
                                     stage: stageController.text,

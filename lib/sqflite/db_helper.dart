@@ -17,7 +17,7 @@ class DbHelper {
 
         // Tabel train
         await db.execute(
-          'CREATE TABLE trains(id INTEGER PRIMARY KEY AUTOINCREMENT, schedule TEXT, categories TEXT, stage TEXT)',
+          'CREATE TABLE trains(id INTEGER PRIMARY KEY AUTOINCREMENT, schedule TEXT, time TEXT, categories TEXT, stage TEXT)',
         );
       },
       version: 1,

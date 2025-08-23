@@ -1,10 +1,12 @@
 import 'package:fittness/views/screen.dart';
 import 'package:fittness/views/splash_screen.dart';
+import 'package:fittness/views/training.dart';
 import 'package:fittness/widget/botnavbar.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 void main() {
-  // initializeDateFormatting("id_ID");
+  initializeDateFormatting("id_ID");
   runApp(const MyApp());
 }
 
@@ -27,7 +29,7 @@ class MyApp extends StatelessWidget {
         SplashScreen1.id: (context) => SplashScreen1(),
         BotNavBar1.id: (context) => BotNavBar1(),
       },
-      // home: DataTrain(),
+      // home: Training1(),
     );
   }
 }
