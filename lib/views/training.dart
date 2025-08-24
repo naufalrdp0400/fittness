@@ -181,7 +181,7 @@ class _Training1State extends State<Training1> {
                         pickerTime.hour,
                         pickerTime.minute,
                       );
-                      final formattedTime = DateFormat.jm("id_ID").format(time);
+                      final formattedTime = DateFormat("hh:mm a").format(time);
                       timeController.text = formattedTime;
                     }
                   },
@@ -195,6 +195,7 @@ class _Training1State extends State<Training1> {
                 ),
                 height(10),
                 DropdownButtonFormField<String>(
+                  dropdownColor: AppColor.background,
                   value: selectedCategories,
                   items: ["Yoga", "Cardio", "Strength", "Stretching"].map((
                     String value,
@@ -220,6 +221,7 @@ class _Training1State extends State<Training1> {
                 ),
                 height(10),
                 DropdownButtonFormField<String>(
+                  dropdownColor: AppColor.background,
                   value: selectedStage,
                   items: ["Beginner", "Intermediate", "Advance"].map((
                     String value,
@@ -244,34 +246,6 @@ class _Training1State extends State<Training1> {
                   },
                 ),
                 height(20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    MSHCheckbox(
-                      size: 30,
-                      value: isChecked,
-                      colorConfig: MSHColorConfig.fromCheckedUncheckedDisabled(
-                        checkedColor: AppColor.accent,
-                      ),
-                      style: style,
-                      onChanged: (value) {
-                        setState(() {
-                          isChecked = value;
-                        });
-                      },
-                    ),
-                    SizedBox(width: 15),
-                    Text(
-                      style: TextStyle(
-                        fontFamily: "Montserrat",
-                        fontSize: 20,
-                        color: AppColor.text,
-                      ),
-                      isChecked == true ? "Keep Your Spirit" : "Are You Sure?",
-                    ),
-                  ],
-                ),
-                height(15),
                 SizedBox(
                   height: 56,
                   width: double.infinity,

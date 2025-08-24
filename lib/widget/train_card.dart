@@ -1,6 +1,7 @@
 import 'package:fittness/models/train.dart';
 import 'package:fittness/utils/app_color.dart';
 import 'package:flutter/material.dart';
+import 'package:fittness/widget/categories_icon.dart';
 
 class TrainCard extends StatelessWidget {
   final Train data;

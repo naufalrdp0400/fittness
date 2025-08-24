@@ -1,6 +1,6 @@
+import 'package:fittness/utils/app_color.dart';
 import 'package:fittness/views/screen.dart';
 import 'package:fittness/views/splash_screen.dart';
-import 'package:fittness/views/training.dart';
 import 'package:fittness/widget/botnavbar.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -18,6 +18,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
+        datePickerTheme: DatePickerThemeData(
+          backgroundColor: AppColor.background,
+        ),
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightGreen),
       ),
 
